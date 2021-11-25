@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study01/constants.dart' as constants;
-import 'package:flutter_study01/menu/menu_event.dart';
+import 'package:flutter_study01/components/home.dart';
+import 'package:flutter_study01/components/loan/loan.dart';
 
 class ContentNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigationKey;
   final String initialRoute = '/';
   final Map<String, WidgetBuilder> routes = {
-    "/": (context) => HomePage(),
-    "/loan": (context) => LoanPage(),
+    "/": (context) => const HomePage(),
+    "/loan": (context) => const LoanList(),
   };
 
   ContentNavigator({
@@ -36,28 +36,6 @@ class ContentNavigator extends StatelessWidget {
         return MaterialPageRoute(
             builder: (context) => UnknownPage(url: routeSettings.name!));
       },
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('首页'),
-    );
-  }
-}
-
-class LoanPage extends StatelessWidget {
-  const LoanPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Loan Page"),
     );
   }
 }

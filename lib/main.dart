@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_study01/constants.dart' as constants;
-import 'package:flutter_study01/components/components.dart';
+import 'package:flutter_study01/components/content_view.dart';
 import 'package:flutter_study01/menu/menu.dart';
 import 'package:flutter_study01/menu/menu_event.dart';
 

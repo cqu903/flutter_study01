@@ -40,8 +40,8 @@ class MenuCategoryObj {
   }
 }
 
-var _m1 = MenuItemObj(title: 'menu1', url: "/");
-var _m2 = MenuItemObj(title: 'menu2', url: "/loan");
+var _m1 = MenuItemObj(title: '主页', url: "/");
+var _m2 = MenuItemObj(title: '贷款单', url: "/loan");
 var _m3 = MenuItemObj(title: 'menu3', url: "/menu1");
 var _m4 = MenuItemObj(title: 'menu4', url: "/menu1");
 var _m5 = MenuItemObj(title: 'menu5', url: "/menu1");
