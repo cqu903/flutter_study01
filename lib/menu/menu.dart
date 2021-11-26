@@ -6,8 +6,9 @@ class MenuItemObj {
   String title;
   String url;
   bool selected = false;
+  String moduleName;
 
-  MenuItemObj({required this.title, required this.url});
+  MenuItemObj({required this.title, required this.url,required this.moduleName});
 
   String getKey() {
     return title;
@@ -40,12 +41,11 @@ class MenuCategoryObj {
   }
 }
 
-var _m1 = MenuItemObj(title: '主页', url: "/");
-var _m2 = MenuItemObj(title: '贷款单', url: "/loan");
-var _m3 = MenuItemObj(title: 'menu3', url: "/menu1");
-var _m4 = MenuItemObj(title: 'menu4', url: "/menu1");
-var _m5 = MenuItemObj(title: 'menu5', url: "/menu1");
-var _mc1 = MenuCategoryObj("系统管理", items: [_m1, _m2]);
+var _m2 = MenuItemObj(title: '贷款单', url: "/loan",moduleName: 'Loan');
+var _m3 = MenuItemObj(title: 'menu3', url: "/menu1",moduleName: 'Loan');
+var _m4 = MenuItemObj(title: 'menu4', url: "/menu1",moduleName: 'Loan');
+var _m5 = MenuItemObj(title: 'menu5', url: "/menu1",moduleName: 'Loan');
+var _mc1 = MenuCategoryObj("系统管理", items: [ _m2]);
 var _mc2 = MenuCategoryObj("用户设置", items: [_m3, _m4, _m5]);
 var menuData = MenuObj([_mc1, _mc2]);
 

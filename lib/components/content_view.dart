@@ -1,52 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study01/components/home.dart';
 import 'package:flutter_study01/components/loan/loan.dart';
+import 'package:flutter_study01/components/unknown.dart';
+import 'package:flutter_study01/menu/menu.dart';
 
-class ContentNavigator extends StatelessWidget {
-  final GlobalKey<NavigatorState> navigationKey;
-  final String initialRoute = '/';
-  final Map<String, WidgetBuilder> routes = {
-    "/": (context) => const HomePage(),
-    "/loan": (context) => const LoanList(),
-  };
+class ContentNavigator extends StatefulWidget {
+  const ContentNavigator({Key? key}) : super(key: key);
 
-  ContentNavigator({
-    Key? key,
-    required this.navigationKey,
-  }) : super(key: key);
+  @override
+  _ContentNavigatorState createState() => _ContentNavigatorState();
+}
+
+class _ContentNavigatorState extends State<ContentNavigator> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class ContentRoutePath {
+  String? moduleName;
+  String? id;
+  bool isUnknown;
+
+  ContentRoutePath():moduleName=null,id=null,isUnknown=false;
+
+  ContentRoutePath.home():id=null,moduleName=null,isUnknown=false ;
+  ContentRoutePath.module({required this.moduleName,this.id}):isUnknown=false;
+  ContentRoutePath.unKnown():moduleName=null,id=null,isUnknown=true;
+}
+
+class ContentRouterDelegte extends RouterDelegate<ContentRoutePath>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin {
+  final GlobalKey<NavigatorState> navigatorKey;
+  MenuItemObj? _selectedMenuItem;
+  bool show404 = false;
+
+  ContentRouterDelegte() :navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  ContentRoutePath get currentConfiguration {
+    if (_selectedMenuItem == null) {
+      return ContentRoutePath.home();
+    }
+    if(show404){
+      return ContentRoutePath.unKnown();
+    }else{
+      return ContentRoutePath.module(moduleName: _selectedMenuItem!.moduleName);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: navigationKey,
-      initialRoute: initialRoute,
-      onGenerateRoute: (routeSettings) {
-        WidgetBuilder? builder = routes[routeSettings.name];
-        if (builder == null) {
-          return MaterialPageRoute(
-              builder: (context) => UnknownPage(url: routeSettings.name!));
-        } else {
-          return MaterialPageRoute(
-            builder: builder,
-            settings: routeSettings,
-          );
-        }
-      },
-      onUnknownRoute: (routeSettings) {
-        return MaterialPageRoute(
-            builder: (context) => UnknownPage(url: routeSettings.name!));
-      },
+      key: navigatorKey,
+      pages: [
+        MaterialPage(
+          key: ValueKey('home'),
+          child: HomePage()
+        ),
+
+      ],
     );
   }
-}
 
-class UnknownPage extends StatelessWidget {
-  final String url;
-
-  const UnknownPage({Key? key, required this.url}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('未知的URL：$url'));
+  Future<void> setNewRoutePath(ContentRoutePath configuration) {
+    // TODO: implement setNewRoutePath
+    throw UnimplementedError();
   }
+
 }
+
